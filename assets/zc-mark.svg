@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>ZC mark</title>
+  <defs>
+    <linearGradient id="zc-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <!-- Z path, reused: top bar, diagonal, bottom bar reaching the C's centre -->
+    <path id="zc-z" d="M 64 120 H 276 L 88 304 H 360"/>
+    <!-- cuts a gap into the C where the Z's bar passes over it -->
+    <mask id="zc-cut">
+      <rect width="512" height="512" fill="#fff"/>
+      <use href="#zc-z" fill="none" stroke="#000" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <g fill="none" stroke="url(#zc-grad)" stroke-width="54" stroke-linecap="round" stroke-linejoin="round">
+    <!-- C: 120px arc opening to the right, centred at (360,304) -->
+    <path d="M 444.9 219.2 A 120 120 0 1 0 444.9 388.8" mask="url(#zc-cut)"/>
+    <use href="#zc-z"/>
+  </g>
+</svg>

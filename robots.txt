@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zenitherps.com/sitemap.xml
