@@ -9,7 +9,7 @@
 
   // Paste the Google Analytics 4 Measurement ID here (looks like G-XXXXXXXXXX).
   // While it is empty nothing is loaded and nothing is tracked.
-  var GA_MEASUREMENT_ID = '';
+  var GA_MEASUREMENT_ID = 'G-D7N3P8TSD8';
 
   // Analytics: load GA4 only when an ID is set, then report the actions that matter:
   // Call Now taps, WhatsApp Us taps, the call-back form, and which sections people reach.
