@@ -9,8 +9,8 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 |---|---|
 | `index.html` | The page. All copy lives here. |
 | `styles.css` | Every style, read from the Claude Design handoff (v2). |
-| `site.js` | Header shadow on scroll, scroll reveals, the call-back form, Google Analytics. |
-| `assets/` | Logo mark (SVG + PNG) and the hero screenshot. |
+| `site.js` | Header shadow on scroll, scroll reveals, the call-back and download forms, Google Analytics. |
+| `assets/` | Logo mark (SVG + PNG), the hero screenshot and the free calculator (`zenith-gold-billing-calculator.xlsx`). |
 | `CNAME` | The custom domain for GitHub Pages. Do not delete. |
 
 ## Editing
@@ -31,6 +31,17 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 
 To switch it on: go to <https://web3forms.com>, enter `info@zenitherps.com`, copy the access key
 from the confirmation email, paste it between the quotes of `WEB3FORMS_KEY`, commit, push.
+
+## The free download (lead magnet)
+
+The "Free download" section offers the Gold Billing Calculator, an Excel file at
+`assets/zenith-gold-billing-calculator.xlsx`. The visitor enters name, mobile and email. The lead
+is sent the same way as the call-back form (Web3Forms to **info@zenitherps.com**, or WhatsApp when
+`WEB3FORMS_KEY` is empty), and only then does the file download start. Call every lead within a
+day; that call is the point of the download.
+
+To change the file, replace the `.xlsx` in `assets/` and keep the same name. GA4 events:
+`calculator_sent` and `calculator_error`.
 
 ## Analytics (Google Analytics 4)
 
