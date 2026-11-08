@@ -25,9 +25,9 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 
 `site.js` has one constant, `WEB3FORMS_KEY`.
 
-- Empty (as shipped): submitting the form opens WhatsApp on 8446297369 with the name, shop,
+- Empty: submitting the form opens WhatsApp on 8446297369 with the name, shop,
   phone and city typed into the message, and the visitor presses Send.
-- Set: the form posts to Web3Forms and the request lands in **info@zenitherps.com**.
+- Set (as it is now): the form posts to Web3Forms and the request lands in **info@zenitherps.com**.
 
 To switch it on: go to <https://web3forms.com>, enter `info@zenitherps.com`, copy the access key
 from the confirmation email, paste it between the quotes of `WEB3FORMS_KEY`, commit, push.

@@ -4,7 +4,7 @@
 
   // Paste the access key from web3forms.com here (tied to info@zenitherps.com).
   // While it is empty, the call-back form opens WhatsApp with the details typed in.
-  var WEB3FORMS_KEY = '';
+  var WEB3FORMS_KEY = '5e8a32a5-9216-4c77-a4c2-551e53abeb08';
   var WHATSAPP_NUMBER = '918446297369';
 
   // Header: border + shadow once the page has scrolled more than 8px.
