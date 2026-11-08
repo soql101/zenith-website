@@ -9,7 +9,7 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 |---|---|
 | `index.html` | The page. All copy lives here. |
 | `styles.css` | Every style, read from the Claude Design handoff (v2). |
-| `site.js` | Header shadow on scroll, scroll reveals, the call-back form. |
+| `site.js` | Header shadow on scroll, scroll reveals, the call-back form, Google Analytics. |
 | `assets/` | Logo mark (SVG + PNG) and the hero screenshot. |
 | `CNAME` | The custom domain for GitHub Pages. Do not delete. |
 
@@ -31,6 +31,30 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 
 To switch it on: go to <https://web3forms.com>, enter `info@zenitherps.com`, copy the access key
 from the confirmation email, paste it between the quotes of `WEB3FORMS_KEY`, commit, push.
+
+## Analytics (Google Analytics 4)
+
+`site.js` has one constant, `GA_MEASUREMENT_ID`. While it is empty nothing is loaded and nothing
+is tracked.
+
+To switch it on: go to <https://analytics.google.com>, create a property for zenitherps.com with a
+**Web** data stream, copy the Measurement ID (looks like `G-XXXXXXXXXX`), paste it between the
+quotes of `GA_MEASUREMENT_ID`, commit, push.
+
+Besides page views, the site reports these events (Reports › Engagement › Events):
+
+| Event | When | Detail |
+|---|---|---|
+| `call_click` | A Call Now button or phone number is tapped | `place`: `top`, `features`, `contact`, `footer`, `mobile_bar` |
+| `whatsapp_click` | A WhatsApp Us button is tapped | `place`: as above |
+| `email_click` | The email address is tapped | `place` |
+| `callback_sent` | The call-back form went through | `method`: `email` or `whatsapp` |
+| `callback_error` | The call-back form failed to send | |
+| `section_view` | A section scrolls into view, once per visit | `section`: `top`, `features`, `local`, `accountant`, `why`, `contact` |
+
+To see `place`, `method` and `section` as columns in reports, register them once as custom
+dimensions: Admin › Custom definitions › Create custom dimension, scope Event, one each. No cookie
+banner is used; GA4 does not store IP addresses.
 
 ## Publishing
 
