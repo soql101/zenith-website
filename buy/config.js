@@ -9,6 +9,6 @@
  * the PayPal button.
  */
 window.ZCX_BUY_CONFIG = {
-  licenceApi: 'PASTE_SANDBOX_SERVER_URL', // e.g. https://zcx-licence-sandbox.<your-subdomain>.workers.dev
-  paypalClientId: 'PASTE_PAYPAL_SANDBOX_CLIENT_ID',
+  licenceApi: 'https://zcx-licence-sandbox.zenith-tryon.workers.dev', // sandbox licence server
+  paypalClientId: 'BAAu-VJVSKx1AV_ATT7nOKgGvyK1G9q4OnQ4XnAtbXTd5QJ-jk65MjU9MHz1a6Qp4bnes4LqYBBWifOdQ0', // sandbox app "ZCX Licence Server"
 };
