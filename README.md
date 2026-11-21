@@ -67,6 +67,21 @@ To see `place`, `method` and `section` as columns in reports, register them once
 dimensions: Admin › Custom definitions › Create custom dimension, scope Event, one each. No cookie
 banner is used; GA4 does not store IP addresses.
 
+## Buy pages for the Chrome extensions
+
+`buy/<product>/index.html` (for example https://zenitherps.com/buy/account-switcher/) sells a
+Pro licence with PayPal. The extensions' "Upgrade" button opens these pages.
+
+| File | What it is |
+|---|---|
+| `buy/config.js` | The licence server address and the PayPal Client ID (both public). |
+| `buy/buy.js` | Loads prices from the server, shows the PayPal button, shows the key. |
+| `buy/buy.css` | Styles on top of `styles.css`. |
+
+Prices are NOT in this repo: they come from the licence server (`ZCX-extensions/licence-server`,
+`src/products.ts`). While `buy/config.js` still has `PASTE_` values, the page shows
+"WhatsApp us to buy" instead of the PayPal button. Setup steps: the licence server's README.
+
 ## Publishing
 
 Every push to `main` republishes the site within a minute or two (GitHub Pages, source: `main`,
