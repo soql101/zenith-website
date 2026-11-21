@@ -99,11 +99,13 @@
     });
   });
 
-  function loadPayPal() {
+  function loadPayPal(sandbox) {
     return new Promise(function (resolve, reject) {
       var s = document.createElement('script');
+      // buyer-country is a sandbox-only test setting: checkout behaves as for a US buyer, so a test
+      // never trips PayPal's block on payments between two Indian accounts. Never sent when live.
       s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(cfg.paypalClientId) +
-        '&currency=USD&intent=capture&components=buttons';
+        '&currency=USD&intent=capture&components=buttons' + (sandbox ? '&buyer-country=US' : '');
       s.onload = function () { resolve(window.paypal); };
       s.onerror = function () { reject(new Error('PayPal did not load')); };
       document.head.appendChild(s);
@@ -155,11 +157,12 @@
       var product = (data.products || []).filter(function (p) { return p.id === productId; })[0];
       if (!product) throw new Error();
       state.product = product;
-      if (data.environment !== 'production') show('buy-sandbox', true);
+      var sandbox = data.environment !== 'production';
+      if (sandbox) show('buy-sandbox', true);
       renderPlans(product);
       show('buy-loading', false);
       show('buy-form', true);
-      return loadPayPal().then(renderButtons);
+      return loadPayPal(sandbox).then(renderButtons);
     })
     .catch(function () {
       show('buy-form', false);
