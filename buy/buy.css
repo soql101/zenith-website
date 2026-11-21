@@ -35,3 +35,15 @@
 .india { margin-top: 24px; font-size: 15px; color: var(--body); line-height: 1.6; }
 
 .buy__note a { color: var(--gold-dark); font-weight: 600; }
+
+/* Questions and answers (native details/summary, works without JavaScript). */
+.faq { margin-top: 56px; }
+.faq h2 { font-size: 24px; color: var(--navy); font-weight: 800; letter-spacing: -.01em; margin-bottom: 14px; }
+.faq__item { border-bottom: 1px solid var(--border); }
+.faq__item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 2px; font-size: 16px; font-weight: 700; color: var(--text); }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: '+'; flex: none; font-size: 22px; font-weight: 500; line-height: 1; color: var(--gold-dark); transition: transform .2s; }
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
+.faq__item p { margin: -4px 0 18px; padding: 0 2px; line-height: 1.65; color: var(--body); }
+.faq__item a { color: var(--navy); text-decoration: underline; }
