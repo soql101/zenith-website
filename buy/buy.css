@@ -33,3 +33,16 @@
 .steps { margin: 16px 0 0; padding-left: 20px; line-height: 1.8; color: var(--body); }
 
 .india { margin-top: 24px; font-size: 15px; color: var(--body); line-height: 1.6; }
+
+/* Terms and refund pages */
+.legal h2 { margin-top: 36px; font-size: 21px; color: var(--navy); font-weight: 800; }
+.legal p, .legal li { line-height: 1.7; color: var(--body); }
+.legal p { margin-top: 12px; }
+.legal ul, .legal ol { margin: 12px 0 0; padding-left: 22px; }
+.legal li + li { margin-top: 6px; }
+.legal a { color: var(--gold-dark); font-weight: 600; }
+.legal__date { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.legal__box { margin-top: 28px; padding: 18px 20px; border-radius: 14px; background: var(--cream-1); border: 1px solid var(--border); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 16px; }
+.foot__links a { color: inherit; }
+.buy__note a { color: var(--gold-dark); font-weight: 600; }
