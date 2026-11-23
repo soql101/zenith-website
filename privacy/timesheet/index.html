@@ -53,7 +53,8 @@
     <h2>Where it is kept</h2>
     <ul>
       <li><b>Events</b> are kept in the browser's memory, reused for up to 10 minutes, and gone when you close the browser.</li>
-      <li><b>On your computer</b>, in the extension's own storage inside Chrome: your calendar list, your clients and rules, your settings (with your name and logo, if you add them), which event you moved to which client by hand, saved reports and your licence key. This is not synced to any cloud.</li>
+      <li><b>On your computer</b>, in the extension's own storage inside Chrome: your calendar list, your clients and rules, your settings (with your name and logo, if you add them), which event you moved to which client by hand, saved reports and your licence key. Calendar data, clients, rules, settings and reports are never synced to any cloud.</li>
+      <li><b>Chrome Sync:</b> if you enter a Pro licence key, the key and a random install id (a made-up number that says nothing about you) are also kept in Chrome Sync, so Pro follows you to your own devices signed in to the same Google account. Nothing else is synced.</li>
       <li><b>Google sign-in:</b> Chrome holds the access token. The extension does not store it and never sees your Google password.</li>
       <li><b>Exported files</b> are saved where you choose. They contain the events you exported, so share them with care.</li>
     </ul>
@@ -61,7 +62,7 @@
     <h2>What is sent over the internet</h2>
     <ul>
       <li>Requests from your browser to Google, to read your calendar.</li>
-      <li>When you enter a Pro licence key, and from time to time afterwards, a check with our licence server (licence.zenitherps.com). It sends the key and the product name, nothing else. No calendar data.</li>
+      <li>When you enter or remove a Pro licence key, and from time to time while you use one, a request to our licence server (licence.zenitherps.com). It sends the key, the product name and the random install id, nothing else. The id is used only to count the places where a key is used (3 per key). No calendar data.</li>
     </ul>
     <p>The extension loads no code from the internet. All its code is inside the package you install from the Chrome Web Store.</p>
 
@@ -76,12 +77,13 @@
     <p>Zenith Timesheet's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener" target="_blank">Google API Services User Data Policy</a>, including the Limited Use requirements. It also follows the <a href="https://developer.chrome.com/docs/webstore/program-policies/policies" rel="noopener" target="_blank">Chrome Web Store User Data Policy</a>, including its Limited Use requirements.</p>
 
     <h2>When you buy Pro</h2>
-    <p>Payment happens on our website (zenitherps.com/buy), not inside the extension. Payments are taken by PayPal, or by UPI for buyers in India. We never see your card details. To issue your licence and help you later, we keep your email address, your licence key, the plan, the amount and the payment reference. We use these only to send you your key, to answer your questions and to handle refunds. See the <a href="/refund/">refund policy</a> and the <a href="/terms/">terms of sale</a>.</p>
+    <p>Payment happens on our website (zenitherps.com/buy), not inside the extension. Payments are taken by PayPal, or by UPI for buyers in India. We never see your card details. To issue your licence and help you later, we keep your email address, your licence key, the plan, the amount, the payment reference and the random install ids your key is used with. We use these only to send you your key, to check it, to answer your questions and to handle refunds. See the <a href="/refund/">refund policy</a> and the <a href="/terms/">terms of sale</a>.</p>
 
     <h2>Your control</h2>
     <ul>
       <li><b>Disconnect</b> in the extension's settings removes the calendar list, the events in memory and Chrome's saved Google token. Your clients and settings stay.</li>
-      <li><b>Delete all data</b>, under <i>Privacy and data</i>, removes everything the extension stored, including your licence key. Removing the extension from Chrome does the same.</li>
+      <li><b>Delete all data</b>, under <i>Privacy and data</i>, removes your calendar data, clients, rules, settings and licence key from this browser. The licence key also leaves your synced devices; the random install id may stay in Chrome Sync.</li>
+      <li>Removing the extension from Chrome deletes what it stored on that computer. To also clear the licence key from Chrome Sync, use <b>Delete all data</b> first.</li>
       <li>To take back the permission at Google as well, remove Zenith Timesheet at <a href="https://myaccount.google.com/permissions" rel="noopener" target="_blank">myaccount.google.com/permissions</a>.</li>
       <li>To ask what we hold about your purchase, or to have it deleted, email <a href="mailto:info@zenitherps.com">info@zenitherps.com</a>. We keep payment records only as long as the law requires.</li>
     </ul>

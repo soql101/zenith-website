@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zenith Timesheet: hours per client from your calendar</title>
+<meta name="description" content="Zenith Timesheet is a Chrome extension that turns your Google Calendar events into a timesheet: hours per client, any period, exported to CSV, Excel or PDF.">
+<link rel="canonical" href="https://zenitherps.com/timesheet/">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/svg+xml" href="/assets/zc-mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/legal/legal.css">
+<style>
+  .app__head { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+  .app__head img { width: 64px; height: 64px; flex: none; }
+  .legal .app__head h1 { margin-top: 0; }
+  .app__shot { display: block; width: 100%; height: auto; margin-top: 28px; border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--card-shadow); }
+  .legal a.btn { text-decoration: none; }
+  .legal a.btn--gold { color: var(--navy); }
+  .legal a.btn--navy { color: #fff; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__brand">
+      <img src="/assets/zc-mark.svg" alt="Zenith logo" width="36" height="36">
+      <span>Zenith</span>
+    </a>
+  </div>
+</header>
+
+<main class="legal">
+  <div class="legal__inner">
+    <div class="legal__label">Chrome extension</div>
+    <div class="app__head">
+      <img src="/assets/timesheet-icon.png" alt="" width="64" height="64">
+      <h1>Zenith Timesheet</h1>
+    </div>
+    <p>Your calendar already knows how many hours you worked. Zenith Timesheet reads the events in your Google Calendar™ and adds up the hours per client, for any period you choose, so you can attach a clean timesheet to your invoice.</p>
+
+    <div class="btn-row" style="margin-top:22px">
+      <a href="/buy/timesheet/" class="btn btn--gold btn--md">See Pro prices</a>
+      <a href="mailto:info@zenitherps.com" class="btn btn--navy btn--md">Email Us</a>
+    </div>
+
+    <img class="app__shot" src="/assets/timesheet-report.png" alt="The report page: hours and amounts for three sample clients in one month" width="1280" height="800">
+
+    <h2>How it works</h2>
+    <ol>
+      <li>Install the extension and press <b>Connect Google Calendar</b>. Access is read-only.</li>
+      <li>Pick a period: this week, last week, this month, last month or any dates.</li>
+      <li>Tell it which events belong to which client: by calendar, colour, a word in the title or a guest's email domain.</li>
+      <li>Check the report and export it to CSV, Excel or PDF.</li>
+    </ol>
+
+    <h2>Who it is for</h2>
+    <p>People who bill by the hour: consultants, freelancers, lawyers, accountants, tutors, coaches and small studios.</p>
+
+    <h2>Which Google data it uses, and why</h2>
+    <ul>
+      <li><b>Your list of calendars</b> (read-only), so you can choose which calendars count.</li>
+      <li><b>Your events</b> (read-only): title, start and end, status, type, colour and guests' email addresses, so each event can be matched to a client and its hours added up.</li>
+    </ul>
+    <p>It cannot change or delete anything in your calendar. Your events are processed in your own browser and are never sent to us or to anyone else. There are no ads and no analytics. Read the full <a href="/privacy/timesheet/">privacy policy</a>.</p>
+
+    <h2>Free and Pro</h2>
+    <ul>
+      <li><b>Free:</b> hours for any period, up to 3 clients, matching by calendar and colour, CSV export for up to 31 days.</li>
+      <li><b>Pro:</b> unlimited clients, matching by title word and guest email domain, Excel and PDF export, CSV for any range, hourly rates and amounts, rounding and minimum rules, overlap options, saved reports, your name and logo on the PDF.</li>
+    </ul>
+    <p>Pro is a one-time payment: valid for one year, or lifetime. Nothing renews by itself. See <a href="/buy/timesheet/">prices</a> and the <a href="/refund/">refund policy</a>.</p>
+
+    <h2>Questions</h2>
+    <p>Email <a href="mailto:info@zenitherps.com">info@zenitherps.com</a>.</p>
+
+    <p style="font-size:14px;color:var(--muted)">Google Calendar is a trademark of Google LLC. Zenith Timesheet is made by Zenith and is not made or endorsed by Google. The picture shows invented clients and events.</p>
+
+    <div class="legal__links">
+      <a href="/privacy/timesheet/">Privacy policy</a>
+      <a href="/terms/">Terms of sale</a>
+      <a href="/refund/">Refund policy</a>
+      <a href="/buy/timesheet/">Buy Pro</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__brand">
+      <div class="foot__logo"><img src="/assets/zc-mark.svg" alt="Zenith logo" width="32" height="32"><div>Zenith</div></div>
+      <div class="foot__tag">Questions? <a href="mailto:info@zenitherps.com">info@zenitherps.com</a></div>
+    </div>
+    <div class="foot__right">
+      <div class="foot__copy"><a href="/privacy/timesheet/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/refund/">Refunds</a> · © 2026 Zenith</div>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
