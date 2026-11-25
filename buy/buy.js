@@ -10,7 +10,22 @@
   var api = String(cfg.licenceApi || '').replace(/\/+$/, '');
   var $ = function (id) { return document.getElementById(id); };
 
+  // Analytics and error reports live in common.js. Buying must work without it.
+  var zenith = window.zenith || { track: function () {}, report: function () {} };
+
   var state = { plan: null, product: null };
+
+  // What is being bought, the way GA4 wants it. Never the key or the buyer's email.
+  function cart(plan) {
+    var p = state.product.plans.filter(function (x) { return x.plan === plan; })[0];
+    var price = p ? Number(p.usd) : 0;
+    return { currency: 'USD', value: price, items: [{ item_id: productId, item_name: state.product.name, item_variant: plan, price: price, quantity: 1 }] };
+  }
+
+  function failed(step, error) {
+    zenith.track('buy_error', { product: productId, step: step });
+    zenith.report('buy-' + step, error);
+  }
 
   function show(id, on) { $(id).hidden = !on; }
 
@@ -81,12 +96,16 @@
       ? 'We also emailed it to ' + d.email + '.'
       : 'Copy it now and keep it safe. If you lose it, email info@zenitherps.com with your PayPal receipt.';
     show('buy-done', true);
+    var sale = cart(d.plan);
+    sale.transaction_id = d.orderId;
+    zenith.track('purchase', sale);
     $('buy-done').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   $('done-copy').addEventListener('click', function () {
     var key = $('done-key').textContent;
     var btn = $('done-copy');
+    zenith.track('key_copied', { product: productId });
     (navigator.clipboard ? navigator.clipboard.writeText(key) : Promise.reject()).then(function () {
       btn.textContent = 'Copied';
       setTimeout(function () { btn.textContent = 'Copy key'; }, 1800);
@@ -118,7 +137,13 @@
       createOrder: function () {
         showError('');
         return post('/api/orders', { productId: productId, plan: state.plan }).then(function (r) {
-          if (!r.ok || !r.data.id) throw new Error(r.data.error || 'Could not start the payment.');
+          if (!r.ok || !r.data.id) {
+            var e = new Error(r.data.error || 'Could not start the payment.');
+            e.reported = true;
+            failed('order', 'HTTP ' + r.status);
+            throw e;
+          }
+          zenith.track('begin_checkout', cart(state.plan));
           return r.data.id;
         });
       },
@@ -126,25 +151,36 @@
         show('buy-working', true);
         return post('/api/orders/' + encodeURIComponent(data.orderID) + '/capture').then(function (r) {
           show('buy-working', false);
-          if (r.status === 402 && r.data.restart) return actions.restart();
+          if (r.status === 402 && r.data.restart) {
+            zenith.track('buy_declined', { product: productId });
+            return actions.restart();
+          }
           if (r.status === 202) {
+            zenith.track('buy_pending', { product: productId });
             show('buy-form', false);
             $('pending-email').textContent = r.data.email || 'your PayPal email';
             show('buy-pending', true);
             return;
           }
           if (!r.ok || !r.data.key) {
+            failed('capture', 'HTTP ' + r.status);
             showError(r.data.error || 'Something went wrong. If money was taken, email info@zenitherps.com with your PayPal receipt.');
             return;
           }
+          r.data.orderId = data.orderID;
           showLicence(r.data);
-        }, function () {
+        }, function (err) {
+          failed('capture-unreachable', err);
           show('buy-working', false);
           showError('We could not reach our server. If PayPal took the money, your key will be emailed to you. Or email info@zenitherps.com.');
         });
       },
-      onCancel: function () { showError(''); },
+      onCancel: function () {
+        zenith.track('buy_cancel', { product: productId });
+        showError('');
+      },
       onError: function (err) {
+        if (!err || !err.reported) failed('paypal', err);
         show('buy-working', false);
         showError((err && err.message) || 'PayPal had a problem. No money was taken. Please try again.');
       }
@@ -152,19 +188,21 @@
   }
 
   fetch(api + '/api/products')
-    .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
     .then(function (data) {
       var product = (data.products || []).filter(function (p) { return p.id === productId; })[0];
-      if (!product) throw new Error();
+      if (!product) throw new Error('product not sold');
       state.product = product;
       var sandbox = data.environment !== 'production';
       if (sandbox) show('buy-sandbox', true);
       renderPlans(product);
       show('buy-loading', false);
       show('buy-form', true);
+      zenith.track('view_item', cart(state.plan));
       return loadPayPal(sandbox).then(renderButtons);
     })
-    .catch(function () {
+    .catch(function (err) {
+      failed('load', err);
       show('buy-form', false);
       notReady();
     });

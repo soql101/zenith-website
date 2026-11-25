@@ -9,7 +9,8 @@ HTML + CSS + JS, no build step. Hosted on GitHub Pages at **https://zenitherps.c
 |---|---|
 | `index.html` | The page. All copy lives here. |
 | `styles.css` | Every style, read from the Claude Design handoff (v2). |
-| `site.js` | Header shadow on scroll, scroll reveals, the call-back and download forms, Google Analytics. |
+| `site.js` | Header shadow on scroll, scroll reveals, the call-back and download forms. |
+| `common.js` | Every page: cookie choice, Google Analytics, error reports. |
 | `assets/` | Logo mark (SVG + PNG), the hero screenshot and the free calculator (`zenith-gold-billing-calculator.xlsx`). |
 | `CNAME` | The custom domain for GitHub Pages. Do not delete. |
 
@@ -43,29 +44,38 @@ day; that call is the point of the download.
 To change the file, replace the `.xlsx` in `assets/` and keep the same name. GA4 events:
 `calculator_sent` and `calculator_error`.
 
-## Analytics (Google Analytics 4)
+## Analytics, cookie choice and error reports
 
-`site.js` has one constant, `GA_MEASUREMENT_ID`. While it is empty nothing is loaded and nothing
-is tracked.
+All in `common.js`, loaded on every page. Nothing is sent from a local copy, only from zenitherps.com.
 
-To switch it on: go to <https://analytics.google.com>, create a property for zenitherps.com with a
-**Web** data stream, copy the Measurement ID (looks like `G-XXXXXXXXXX`), paste it between the
-quotes of `GA_MEASUREMENT_ID`, commit, push.
+- **Google Analytics 4** (`GA_MEASUREMENT_ID`): loaded only after the visitor presses Accept. The
+  choice is kept in their browser; *Cookie settings* in the footer changes it.
+- **Sentry** (`SENTRY_DSN`): error reports, always on, no cookies. Off while the DSN is empty. To
+  switch on: Sentry > create a project (platform *Browser JavaScript*, name `website`), skip the
+  install steps, *Project settings > Client Keys (DSN)*, paste it, commit, push. Then in Sentry:
+  *Security & Privacy > Prevent Storing of IP Addresses* on, *Client Keys > Allowed Domains*
+  `zenitherps.com`, and the same email alerts as the licence server.
 
-Besides page views, the site reports these events (Reports › Engagement › Events):
+Never pass an email address, phone number, licence key or form value to `zenith.track` or
+`zenith.report`. If you change what is collected, change `privacy/index.html` too.
+
+Besides page views, GA4 gets these events (Reports > Engagement > Events):
 
 | Event | When | Detail |
 |---|---|---|
-| `call_click` | A Call Now button or phone number is tapped | `place`: `top`, `features`, `contact`, `footer`, `mobile_bar` |
-| `whatsapp_click` | A WhatsApp Us button is tapped | `place`: as above |
-| `email_click` | The email address is tapped | `place` |
-| `callback_sent` | The call-back form went through | `method`: `email` or `whatsapp` |
-| `callback_error` | The call-back form failed to send | |
-| `section_view` | A section scrolls into view, once per visit | `section`: `top`, `features`, `local`, `accountant`, `why`, `contact` |
+| `call_click`, `whatsapp_click`, `email_click` | A phone, WhatsApp or email link is tapped | `place` |
+| `store_click` | A Chrome Web Store link is tapped | `place` |
+| `buy_page_click` | A link to a buy page is tapped | `place`, `product` |
+| `callback_sent`, `calculator_sent` | A form went through | `method`: `email` or `whatsapp` |
+| `callback_error`, `calculator_error` | A form failed to send | |
+| `section_view` | A home page section scrolls into view, once per visit | `section` |
+| `view_item`, `begin_checkout`, `purchase` | Buy page: prices shown, PayPal order made, key shown | GA4 e-commerce fields |
+| `buy_cancel`, `buy_declined`, `buy_pending` | Buy page: closed PayPal, card declined, PayPal is checking | `product` |
+| `buy_error` | Buy page: something failed (also sent to Sentry) | `product`, `step` |
+| `key_copied` | The copy button was pressed | `product` |
 
-To see `place`, `method` and `section` as columns in reports, register them once as custom
-dimensions: Admin › Custom definitions › Create custom dimension, scope Event, one each. No cookie
-banner is used; GA4 does not store IP addresses.
+To see `place`, `product`, `step`, `method` and `section` as columns, register each once: Admin >
+Custom definitions > Create custom dimension, scope Event.
 
 ## Buy pages for the Chrome extensions
 
