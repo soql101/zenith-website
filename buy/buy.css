@@ -34,6 +34,8 @@
 
 .india { margin-top: 24px; font-size: 15px; color: var(--body); line-height: 1.6; }
 
+.buy__note a { color: var(--gold-dark); font-weight: 600; }
+
 /* Questions and answers (native details/summary, works without JavaScript). */
 .faq { margin-top: 56px; }
 .faq h2 { font-size: 24px; color: var(--navy); font-weight: 800; letter-spacing: -.01em; margin-bottom: 14px; }
